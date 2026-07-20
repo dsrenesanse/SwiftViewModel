@@ -8,15 +8,29 @@
 import SwiftClonable
 import SwiftUI
 
-@Observable
 @MainActor
-public class ViewModel<T: Clonable> {
+open class ViewModel<T: Clonable> {
 
     @ObservationIgnored
     private var pending: Task<Void, Never>?
 
     @ObservationIgnored
     private var pendingStorage = [UUID: Task<Void, Never>]()
+
+    public init() {
+        if (self as! T).isCopy {
+            return
+        }
+        initialize()
+    }
+
+    open func initialize() {
+        
+    }
+
+    open func deinitialize() {
+
+    }
 
     public func process(
         computation: @escaping (_ state: T) async -> (_ state: T) -> Void
@@ -50,12 +64,16 @@ public class ViewModel<T: Clonable> {
         pendingStorage[key] = pending
     }
 
-    deinit {
+    isolated deinit {
+        if (self as! T).isCopy {
+            return
+        }
         pending?.cancel()
         let storage = pendingStorage
         for task in storage.values {
             task.cancel()
         }
+        deinitialize()
     }
 }
 
