@@ -10,7 +10,7 @@ import SwiftUI
 
 @Observable
 @MainActor
-class ViewModel<T: Clonable> {
+public class ViewModel<T: Clonable> {
 
     @ObservationIgnored
     private var pending: Task<Void, Never>?
@@ -18,7 +18,7 @@ class ViewModel<T: Clonable> {
     @ObservationIgnored
     private var pendingStorage = [UUID: Task<Void, Never>]()
 
-    func process(
+    public func process(
         computation: @escaping (_ state: T) async -> (_ state: T) -> Void
     ) {
         let key = UUID()
@@ -33,7 +33,7 @@ class ViewModel<T: Clonable> {
         pendingStorage[key] = task
     }
 
-    func processSync(
+    public func processSync(
         computation: @escaping (_ state: T) async -> (_ state: T) -> Void
     ) {
         let key = UUID()
