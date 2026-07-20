@@ -1,0 +1,24 @@
+{
+  "originHash" : "9e93b879d3e108df841721385156a754e9d8b60afcabb7170617ac333b11606f",
+  "pins" : [
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
+      "state" : {
+        "revision" : "79e4b74a295b6eb74a8b585e3a39d29e70c1dbd1",
+        "version" : "603.0.2"
+      }
+    },
+    {
+      "identity" : "swiftclonable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dsrenesanse/SwiftClonable",
+      "state" : {
+        "branch" : "main",
+        "revision" : "fc80f0e50ff8a5729a10b7c0398a8dfc3f5cbba0"
+      }
+    }
+  ],
+  "version" : 3
+}
