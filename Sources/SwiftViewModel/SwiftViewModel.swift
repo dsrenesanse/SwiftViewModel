@@ -60,6 +60,8 @@ public class ViewModel<T: Clonable> {
 }
 
 public actor SyncProcessor {
+    public init() {}
+
     private var pending = [UUID: Task<Sendable?, Never>]()
 
     public func process<T>(action: Task<T, Never>) async -> T? {
