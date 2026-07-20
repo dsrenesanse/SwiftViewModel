@@ -1,6 +1,6 @@
 //
-//  Test.swift
-//  Beam
+//  SwiftViewModel.swift
+//  SwiftViewModel
 //
 //  Created by Dan on 2026/02/16.
 //
@@ -60,12 +60,12 @@ class ViewModel<T: Clonable> {
 }
 
 public actor SyncProcessor {
-    private var pending = [UUID: Task<Any?, Never>]()
+    private var pending = [UUID: Task<Sendable?, Never>]()
 
     public func process<T>(action: Task<T, Never>) async -> T? {
         let key = UUID()
         let capturedPendings = Array(pending.values)
-        let task = Task<Any?, Never> { [weak self] in
+        let task = Task<Sendable?, Never> { [weak self] in
             guard self != nil else { return nil }
             let result = await action.value
             guard self != nil else { return nil }
